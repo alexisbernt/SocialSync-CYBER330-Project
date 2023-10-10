@@ -65,7 +65,6 @@ def get_date(csv_file):
     data_sorted = data_sorted.reset_index(drop=True)
     # Print the sorted DataFrame
     print(data_sorted)
-# Replace 'your_csv_file.csv' with the path to your CSV file
 get_date('StreakCounter.csv')
 
 
