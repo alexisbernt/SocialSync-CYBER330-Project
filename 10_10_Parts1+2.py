@@ -55,16 +55,16 @@ print(data)
 import pandas as pd
 
 def get_date(csv_file):
-    # Read the CSV file into a Pandas DataFrame
     data = pd.read_csv('StreakCounter.csv')
     # Convert the 'Date' column to a datetime format
     data['Date'] = pd.to_datetime(data['Date'])
     # Sort the DataFrame by the 'Date' column in ascending order
     data_sorted = data.sort_values(by='Date', ascending=True)
-    # Reset the index 
+    # Reset the index with drip = True 
     data_sorted = data_sorted.reset_index(drop=True)
-    # Print the sorted DataFrame
+    # Print sorted data
     print(data_sorted)
+# Calling with specific file name (StreakCounter.csv)
 get_date('StreakCounter.csv')
 
 
