@@ -14,7 +14,7 @@
 # In[7]:
 
 
-# Klayton's part 1 through using 'import csv'
+# part 1 through using 'import csv'
 
 import csv ,operator
 
@@ -35,6 +35,8 @@ get_dict()
 for item in connections:
     print(item, ',',connections[item])
 
+# part 1 Using the same csv file but opening with pandas and then sorting via pandas
+
 data=csv.reader(open('StreakCounter.csv'),delimiter='/')
 data=sorted(data,key=operator.itemgetter(0),reverse=True)
 
@@ -51,7 +53,7 @@ print(data)
 
 # In[2]:
 
-
+# This sorting of the data is similar to material covered in chapter 9 (Sorted and Unsorted List/Queue Implementation)
 import pandas as pd
 
 def get_date(csv_file):
