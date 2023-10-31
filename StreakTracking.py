@@ -1,7 +1,6 @@
 import pandas as pd
 import datetime
 import csv
-from datetime import timedelta
 
 
 connections_file = 'StreakCounter.csv'
@@ -42,12 +41,12 @@ def get_overdue_connections():
             print(date)
 # - - - - - - - - - - - - - - - - - - - - - - - - 
 # additions 
-# - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - -
+pending_list = []
 
-def get_current_connections():
-    pending_list = []
+def get_current_connections(pending_list):
    # open the file
-    with open('samplecsv.csv') as file_obj: 
+    with open('StreakCounter.csv') as file_obj:
         with open(last_run_file, "r") as file:
              reader_obj = csv.reader(file) 
              for date in get_sorted_data()['Date']:
@@ -61,10 +60,12 @@ def get_current_connections():
                         pending_list.append(row) 
 
 set_last_run_date()
-get_overdue_connections()
-get_current_connections()
+#get_overdue_connections()
+get_current_connections(pending_list)
 
 def display_prompt(pending_list):
+    from datetime import datetime
+    from datetime import timedelta
     if pending_list == 0:
         print('No connections to be made at this time.')
         print('Would you like to add connections?')
@@ -73,7 +74,7 @@ def display_prompt(pending_list):
         connect_prompt = input('Did you connect with your assigned connections? (y/n): ')
         if connect_prompt == 'y':
             # remove the item from pending list
-            pending_list.pop(item)
+            pending_list.remove(item)
             # update the file to state that connection was made 
             print('Great! You made your connection. When would you like to connect with this person again?')
             print("1. 2 days from now.")
@@ -81,7 +82,8 @@ def display_prompt(pending_list):
             print("3. One month from now.")
             connect_again = input('When would you like to connect with this person again? (1,2,3): ')
             # if the next connection is two days from now
-            begin_date_string = str(#the date)
+            # Fix format 2023-10-31 worked
+            begin_date_string = str(read_last_run_date())
             begin_date = datetime.strptime(begin_date_string, "%Y-%m-%d")
             end_date = begin_date + timedelta(days=2)
             # if the next connection is one week from now
@@ -98,3 +100,4 @@ def display_prompt(pending_list):
             print('Please try again.')
             
         
+display_prompt(pending_list)
