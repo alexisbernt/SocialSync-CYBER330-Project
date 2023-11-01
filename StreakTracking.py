@@ -1,6 +1,7 @@
 import pandas as pd
 import datetime
 import csv
+from datetime import timedelta
 
 
 connections_file = 'StreakCounter.csv'
@@ -17,7 +18,8 @@ def read_last_run_date():
     try:
         with open(last_run_file, "r") as file:
             last_run_date_str = file.read()
-            return datetime.datetime.strptime(last_run_date_str, "%Y-%m-%d")
+            run_date = datetime.datetime.strptime(last_run_date_str, "%Y-%m-%d")
+            return run_date.strftime("%Y-%m-%d")
     except FileNotFoundError:
         # If the file doesn't exist, return None
         return None
@@ -37,12 +39,16 @@ def get_sorted_data():
 
 def get_overdue_connections():
     for date in get_sorted_data()['Date']:
+        date = date.strftime("%Y-%m-%d")
         if date <= read_last_run_date():
             print(date)
 # - - - - - - - - - - - - - - - - - - - - - - - - 
 # additions 
 # - - - - - - - - - - - - - - - - - - - - - - - -
+
+
 pending_list = []
+
 
 def get_current_connections(pending_list):
    # open the file
@@ -50,6 +56,7 @@ def get_current_connections(pending_list):
         with open(last_run_file, "r") as file:
              reader_obj = csv.reader(file) 
              for date in get_sorted_data()['Date']:
+                date = date.strftime("%Y-%m-%d")
                 if date == read_last_run_date():
                     print('Here is your current connection need: ')
                     print(date)
@@ -59,13 +66,11 @@ def get_current_connections(pending_list):
                         # Then should we store this item in a list until fufilled (?)
                         pending_list.append(row) 
 
-set_last_run_date()
+#set_last_run_date()
 #get_overdue_connections()
 get_current_connections(pending_list)
 
 def display_prompt(pending_list):
-    from datetime import datetime
-    from datetime import timedelta
     if pending_list == 0:
         print('No connections to be made at this time.')
         print('Would you like to add connections?')
@@ -84,7 +89,7 @@ def display_prompt(pending_list):
             # if the next connection is two days from now
             # Fix format 2023-10-31 worked
             begin_date_string = str(read_last_run_date())
-            begin_date = datetime.strptime(begin_date_string, "%Y-%m-%d")
+            begin_date = datetime.datetime.strptime(begin_date_string, "%Y-%m-%d")
             end_date = begin_date + timedelta(days=2)
             # if the next connection is one week from now
             # if the next connection is one month from now 
