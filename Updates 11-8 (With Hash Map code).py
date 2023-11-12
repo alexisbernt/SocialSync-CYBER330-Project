@@ -60,7 +60,7 @@ import csv
 
 pending_list = []
 
-# print(pending_list)
+print(pending_list)
 
 def get_current_connections(pending_list):
     with open('StreakCounter.csv') as file_obj:

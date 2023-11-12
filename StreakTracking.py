@@ -2,6 +2,7 @@ import pandas as pd
 import datetime
 import csv
 from datetime import timedelta
+from hash_map_base import HashMapBase
 
 
 connections_file = 'StreakCounter.csv'
@@ -68,7 +69,7 @@ def get_current_connections(pending_list):
 
 #set_last_run_date()
 #get_overdue_connections()
-get_current_connections(pending_list)
+#get_current_connections(pending_list)
 
 def display_prompt(pending_list):
     if pending_list == 0:
@@ -103,6 +104,28 @@ def display_prompt(pending_list):
                 print('Error. Invalid input.')
         if connect_prompt != 'y' or 'n':
             print('Please try again.')
-            
-        
-display_prompt(pending_list)
+
+
+# display_prompt(pending_list)
+connection_map = HashMapBase()
+
+
+def pull_connections():
+    for name, date in zip(get_sorted_data()['Name'], get_sorted_data()['Date']):
+        date = date.strftime("%Y-%m-%d")
+        connection_map[name] = date
+
+
+def push_connections():
+    with open(connections_file, "w", newline='') as file:
+        fileWriter = csv.writer(file)
+        fileWriter.writerow(['Name', 'Date'])
+        for name, date in connection_map.items():
+            fileWriter.writerow([name, date])
+
+pull_connections()
+print('\n for  loop')
+for key, value in connection_map:
+    print(key, connection_map[key])
+
+push_connections()
