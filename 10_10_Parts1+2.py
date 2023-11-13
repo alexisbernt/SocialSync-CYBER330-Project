@@ -22,7 +22,7 @@ connections = {}
 
 # Open the CSV file and iterate through the rows adding it to the dictionary
 def get_dict():
-    with open('StreakCounter.csv', 'r') as file:
+    with open('CSVFiles/StreakCounter.csv', 'r') as file:
         csvreader = csv.reader(file)
         for row in csvreader:
             item, term =row
@@ -37,7 +37,7 @@ for item in connections:
 
 # part 1 Using the same csv file but opening with pandas and then sorting via pandas
 
-data=csv.reader(open('StreakCounter.csv'),delimiter='/')
+data=csv.reader(open('CSVFiles/StreakCounter.csv'), delimiter='/')
 data=sorted(data,key=operator.itemgetter(0),reverse=True)
 
 
@@ -46,7 +46,7 @@ data=sorted(data,key=operator.itemgetter(0),reverse=True)
 
 # 1. Dictionary example with people and sequences of dates
 import pandas as pd
-data = pd.read_csv('StreakCounter.csv')
+data = pd.read_csv('CSVFiles/StreakCounter.csv')
 print(data)
 # print(sc.to_string())
 
@@ -57,7 +57,7 @@ print(data)
 import pandas as pd
 
 def get_date(csv_file):
-    data = pd.read_csv('StreakCounter.csv')
+    data = pd.read_csv('CSVFiles/StreakCounter.csv')
     # Convert the 'Date' column to a datetime format
     data['Date'] = pd.to_datetime(data['Date'])
     # Sort the DataFrame by the 'Date' column in ascending order
@@ -67,7 +67,7 @@ def get_date(csv_file):
     # Print sorted data
     print(data_sorted)
 # Calling with specific file name (StreakCounter.csv)
-get_date('StreakCounter.csv')
+get_date('CSVFiles/StreakCounter.csv')
 
 
 # In[3]:
@@ -77,7 +77,7 @@ get_date('StreakCounter.csv')
 
 import datetime
 # using a file to store the last run date 
-file_path = 'last_run.txt'
+file_path = 'CSVFiles/last_run.txt'
 # this list will do the storage (store items)
 user_activity = []
 

@@ -91,21 +91,3 @@ class HashMapBase:
                 return
         # if the key is not found
         raise KeyError(f'Key not found: {k}')
-
-
-# In[6]:
-
-
-# create an instance of HashMapBase with default constructor values
-
-# ex_hash_map = HashMapBase()
-# ex_hash_map['key1'] = 'valuea'
-# ex_hash_map['key2'] = 'valueb'
-# ex_hash_map['key3'] = 'valuec'
-#
-# print(ex_hash_map['key1'])
-# print(ex_hash_map['key2'])
-# print(ex_hash_map['key3'])
-
-# can add, retrieve, and delete key-value pairs in the hash map
-# Add key-value pairs to ex_hash_map

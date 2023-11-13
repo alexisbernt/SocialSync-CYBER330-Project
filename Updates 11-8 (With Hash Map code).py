@@ -10,8 +10,8 @@ import csv
 from datetime import timedelta
 
 
-connections_file = 'StreakCounter.csv'
-last_run_file = 'last_run.txt'
+connections_file = 'CSVFiles/StreakCounter.csv'
+last_run_file = 'CSVFiles/last_run.txt'
 
 
 def set_last_run_date():
@@ -63,7 +63,7 @@ pending_list = []
 print(pending_list)
 
 def get_current_connections(pending_list):
-    with open('StreakCounter.csv') as file_obj:
+    with open('CSVFiles/StreakCounter.csv') as file_obj:
         with open(last_run_file, "r") as file:
             reader_obj = csv.reader(file) 
             for date in get_sorted_data()['Date']:
