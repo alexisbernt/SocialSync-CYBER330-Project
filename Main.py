@@ -67,20 +67,43 @@ def get_current_connections(pending_list):
 def display_prompt(pending_list):
     if len(pending_list) == 0:
         print('No connections to be made at this time.')
-        print('Would you like to add connections?')
-        # create way for user to add connections ...
-        return
-    connect_prompt = input('Did you connect with ' + pending_list[0] + '? (y/n): ')
-    if connect_prompt == 'y':
-        update_connections()
-    elif connect_prompt == 'n':
-        while connect_prompt == 'n':
-            print('Please connect now with the assigned connection.')
+        add_connect = input('Would you like to add connections? (y/n): ')
+        # # create way for user to add connections ...
+        if add_connect == 'y':
+            add_name = input('What is the name of the person to connect with? ')
+            add_date = input('When would you like to connect with this person? ')
+            from csv import DictWriter
+            # list of column names
+            field_names = ['Name', 'Date']
+            # what we want to add to Dictionary that we want to add as a new row
+            add = {'Name': add_name, 'Date': add_date}
+            # Open CSV file in append mode
+            # Create a file object for this file
+            with open('StreakCounter.csv', 'a') as f_object:
+                # Pass the file object and a list of column names to DictWriter()... You will get a object of DictWriter
+                dictwriter_object = DictWriter(f_object, fieldnames=field_names)
+                # Pass the dictionary as an argument to the Writerow()
+                dictwriter_object.writerow(add)
+                # Close the file object
+                f_object.close()
+        elif add_connect == 'n':
+            return
+        else:
+            print('Error. Please proceed and try again.')
             display_prompt(pending_list)
-    elif connect_prompt != 'y' or 'n':
-        print('Please try again.')
-    if len(pending_list) != 0:
-        display_prompt(pending_list)
+
+    elif len(pending_list) != 0:
+        connect_prompt = input('Did you connect with ' + pending_list[0] + '? (y/n): ')
+        if connect_prompt == 'y':
+            update_connections()
+        elif connect_prompt == 'n':
+            while connect_prompt == 'n':
+                print('Please connect now with the assigned connection.')
+                display_prompt(pending_list)
+        elif connect_prompt != 'y' or 'n':
+            print('Please try again.')
+    # if len(pending_list) != 0:
+    #     display_prompt(pending_list)
 
 
 # ask the user when they want the next connection and update it in the hash map
