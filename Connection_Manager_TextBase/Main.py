@@ -5,8 +5,8 @@ from datetime import timedelta
 from hash_map_base import HashMapBase
 
 # designate File locations, create hashmap object, create empty list for connections
-connections_file = 'CSVFiles/StreakCounter.csv'
-last_run_file = 'CSVFiles/last_run.txt'
+connections_file = 'Connection_Manager_TextBase/CSVFiles/StreakCounter.csv'
+last_run_file = 'Connection_Manager_TextBase/CSVFiles/last_run.txt'
 connection_map = HashMapBase()
 pending_list = []
 
@@ -72,20 +72,7 @@ def display_prompt(pending_list):
         if add_connect == 'y':
             add_name = input('What is the name of the person to connect with? ')
             add_date = input('When would you like to connect with this person? ')
-            from csv import DictWriter
-            # list of column names
-            field_names = ['Name', 'Date']
-            # what we want to add to Dictionary that we want to add as a new row
-            add = {'Name': add_name, 'Date': add_date}
-            # Open CSV file in append mode
-            # Create a file object for this file
-            with open('StreakCounter.csv', 'a') as f_object:
-                # Pass the file object and a list of column names to DictWriter()... You will get a object of DictWriter
-                dictwriter_object = DictWriter(f_object, fieldnames=field_names)
-                # Pass the dictionary as an argument to the Writerow()
-                dictwriter_object.writerow(add)
-                # Close the file object
-                f_object.close()
+            connection_map[add_name] = add_date
         elif add_connect == 'n':
             return
         else:
