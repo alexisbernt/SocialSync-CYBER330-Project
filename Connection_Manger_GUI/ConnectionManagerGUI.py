@@ -48,11 +48,11 @@ class ConnectionManagerGUI:
         self.add_button.pack(side='left')
 
         # delete functionality
-        self.prompt_removal_name = tkinter.Label(self.lower_frame, text='Name to remove: ')
-        self.remove_name = tkinter.Entry(self.lower_frame, width=10)
-        self.prompt_removal_date = tkinter.Label(self.lower_frame, text='Date to remove: ')
-        self.remove_date = tkinter.Entry(self.lower_frame, width=10)
-        self.remove_button = tkinter.Button(self.lower_frame, text='REMOVE', command=self.display_prompt())
+        self.prompt_removal_name = tkinter.Label(self.body_frame2, text='Name to remove: ')
+        self.remove_name = tkinter.Entry(self.body_frame2, width=10)
+        self.prompt_removal_date = tkinter.Label(self.body_frame2, text='Date to remove: ')
+        self.remove_date = tkinter.Entry(self.body_frame2, width=10)
+        self.remove_button = tkinter.Button(self.body_frame2, text='REMOVE', command=self.display_prompt())
         self.prompt_removal_name.pack(side='left')
         self.remove_name.pack(side='left')
         self.prompt_removal_date.pack(side='left')
