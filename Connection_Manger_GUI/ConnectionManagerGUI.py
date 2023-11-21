@@ -39,6 +39,8 @@ class ConnectionManagerGUI:
         self.update_button.pack()
         self.spacing = tkinter.Label(self.upper_frame2, text=' ')
         self.spacing.pack()
+
+        # add functionality
         self.calendar = (Calendar(self.body_frame, selectmode='day', date_pattern='yyyy-mm-dd'))
         self.calendar.pack()
         self.prompt_name = tkinter.Label(self.body_frame, text='Name to add: ')
@@ -73,16 +75,6 @@ class ConnectionManagerGUI:
 
         tkinter.mainloop()
 
-    def get_current_connections(pending_list):
-        # open the file
-        with open(last_run_file, "r") as file:
-            reader_obj = csv.reader(file)
-            for name, date in connection_map.items():
-                if date == read_last_run_date():
-                    print('Here is your current connection need: ')
-                    print(name, date)
-                    pending_list.append(name)
-
     def get_sorted_data(self):
         lst = []
         for name in get_sorted_data()['Name']:
@@ -103,14 +95,8 @@ class ConnectionManagerGUI:
         connection_map[new_name] = new_date
 
     def delete(self):
-        delete_name = self.remove_name.get()
-        with open(connections_file, "w", newline='') as file:
-            fileWriter = csv.writer(file)
-            fileWriter.writerow(['Name', 'Date'])
-            for name, date in connection_map.items():
-                if name != delete_name:
-                    fileWriter.writerow(name, date)
+        pass
 
 
-# pull_connections()
+pull_connections()
 run_gui = ConnectionManagerGUI()
