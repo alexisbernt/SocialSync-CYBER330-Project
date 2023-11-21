@@ -3,7 +3,9 @@ from tkinter import Tk, Button
 from tkinter import ttk  # importing the ttk module for combobox (dropdown)
 from tkcalendar import Calendar
 from Main import *
+
 labels = []
+
 
 class ConnectionManagerGUI:
 
@@ -75,7 +77,16 @@ class ConnectionManagerGUI:
 
         tkinter.mainloop()
 
+    # Not yet getting to work
     def get_sorted_data(self):
+        # redo_date = self.update_date_entry.get()
+        # redo_name = self.update_name_entry.get()
+        # connection_map[redo_name] = redo_date
+        # with open(connections_file, "w", newline='') as file:
+        #     fileWriter = csv.writer(file)
+        #     fileWriter.writerow(['Name', 'Date'])
+        #     for name, date in connection_map.items():
+        #         fileWriter.writerow([name, date])
         lst = []
         for name in get_sorted_data()['Name']:
             lst.append(name)
@@ -89,13 +100,28 @@ class ConnectionManagerGUI:
             label.pack()
             labels.append(label)
 
+    # working add function
     def add(self):
         new_date = datetime.datetime.strptime(self.calendar.get_date(), "%Y-%m-%d").strftime("%Y-%m-%d")
         new_name = self.add_name.get()
         connection_map[new_name] = new_date
+        with open(connections_file, "w", newline='') as file:
+            fileWriter = csv.writer(file)
+            fileWriter.writerow(['Name', 'Date'])
+            # for i in range(1):
+            #     fileWriter.writerow([new_name, new_date])
+            for name, date in connection_map.items():
+                fileWriter.writerow([name, date])
 
+    # working delete function for remove
     def delete(self):
-        pass
+        delete_name = self.remove_name.get()
+        with open(connections_file, "w", newline='') as file:
+            fileWriter = csv.writer(file)
+            fileWriter.writerow(['Name', 'Date'])
+            for name, date in connection_map.items():
+                if name != delete_name:
+                    fileWriter.writerow([name, date])
 
 
 pull_connections()
