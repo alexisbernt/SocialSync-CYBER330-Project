@@ -8,7 +8,7 @@ from datetime import timedelta
 from hash_map_base import HashMapBase
 
 # designate File locations, create hashmap object, create empty list for connections
-connections_file = 'CSVFiles/StreakCounter.csv'
+connections_file = 'CSVFiles/StreakCounterGUI.csv'
 last_run_file = 'CSVFiles/last_run.txt'
 connection_map = HashMapBase()
 pending_list = []

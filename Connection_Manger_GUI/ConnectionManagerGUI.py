@@ -29,6 +29,7 @@ class ConnectionManagerGUI:
         self.update_dropdown = ttk.Combobox(self.upper_frame, textvariable=self.update_var, values=self.update_options)
         self.update_dropdown.pack()
 
+        # Update Functionality
         self.update_name = tkinter.Label(self.upper_frame2, text='Updated name: ')
         self.update_name_entry = tkinter.Entry(self.upper_frame2, width=10)
         self.update_date = tkinter.Label(self.upper_frame2, text='Updated date: ')
@@ -37,7 +38,7 @@ class ConnectionManagerGUI:
         self.update_name_entry.pack(side='left')
         self.update_date.pack(side='left')
         self.update_date_entry.pack(side='left')
-        self.update_button = tkinter.Button(self.upper_frame2, text='UPDATE', command=self.get_sorted_data)
+        self.update_button = tkinter.Button(self.upper_frame2, text='UPDATE', command=self.update_connection)
         self.update_button.pack()
         self.spacing = tkinter.Label(self.upper_frame2, text=' ')
         self.spacing.pack()
@@ -59,13 +60,13 @@ class ConnectionManagerGUI:
         # delete functionality
         self.prompt_removal_name = tkinter.Label(self.body_frame2, text='Name to remove: ')
         self.remove_name = tkinter.Entry(self.body_frame2, width=10)
-        self.prompt_removal_date = tkinter.Label(self.body_frame2, text='Date to remove: ')
-        self.remove_date = tkinter.Entry(self.body_frame2, width=10)
+        # self.prompt_removal_date = tkinter.Label(self.body_frame2, text='Date to remove: ')
+        # self.remove_date = tkinter.Entry(self.body_frame2, width=10)
         self.remove_button = tkinter.Button(self.body_frame2, text='REMOVE', command=self.delete)
         self.prompt_removal_name.pack(side='left')
         self.remove_name.pack(side='left')
-        self.prompt_removal_date.pack(side='left')
-        self.remove_date.pack(side='left')
+        # self.prompt_removal_date.pack(side='left')
+        # self.remove_date.pack(side='left')
         self.remove_button.pack(side='left')
 
         # pack frames
@@ -79,18 +80,16 @@ class ConnectionManagerGUI:
 
     # Not yet getting to work
     def get_sorted_data(self):
-        # redo_date = self.update_date_entry.get()
-        # redo_name = self.update_name_entry.get()
-        # connection_map[redo_name] = redo_date
-        # with open(connections_file, "w", newline='') as file:
-        #     fileWriter = csv.writer(file)
-        #     fileWriter.writerow(['Name', 'Date'])
-        #     for name, date in connection_map.items():
-        #         fileWriter.writerow([name, date])
         lst = []
         for name in get_sorted_data()['Name']:
             lst.append(name)
         return lst
+
+    def update_connection(self):
+        new_date = datetime.datetime.strptime(self.calendar.get_date(), "%Y-%m-%d").strftime("%Y-%m-%d")
+        new_name = self.update_dropdown.get()
+        connection_map[new_name] = new_date
+        push_connections()
 
     def display_prompt(self):
         for item in labels:
@@ -105,23 +104,12 @@ class ConnectionManagerGUI:
         new_date = datetime.datetime.strptime(self.calendar.get_date(), "%Y-%m-%d").strftime("%Y-%m-%d")
         new_name = self.add_name.get()
         connection_map[new_name] = new_date
-        with open(connections_file, "w", newline='') as file:
-            fileWriter = csv.writer(file)
-            fileWriter.writerow(['Name', 'Date'])
-            # for i in range(1):
-            #     fileWriter.writerow([new_name, new_date])
-            for name, date in connection_map.items():
-                fileWriter.writerow([name, date])
+        push_connections()
 
     # working delete function for remove
     def delete(self):
-        delete_name = self.remove_name.get()
-        with open(connections_file, "w", newline='') as file:
-            fileWriter = csv.writer(file)
-            fileWriter.writerow(['Name', 'Date'])
-            for name, date in connection_map.items():
-                if name != delete_name:
-                    fileWriter.writerow([name, date])
+        del connection_map[self.remove_name.get()]
+        push_connections()
 
 
 pull_connections()
