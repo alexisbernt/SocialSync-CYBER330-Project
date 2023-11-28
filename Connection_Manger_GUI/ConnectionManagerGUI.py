@@ -30,14 +30,6 @@ class ConnectionManagerGUI:
         self.update_dropdown.pack()
 
         # Update Functionality
-        self.update_name = tkinter.Label(self.upper_frame2, text='Updated name: ')
-        self.update_name_entry = tkinter.Entry(self.upper_frame2, width=10)
-        self.update_date = tkinter.Label(self.upper_frame2, text='Updated date: ')
-        self.update_date_entry = tkinter.Entry(self.upper_frame2, width=10)
-        self.update_name.pack(side='left')
-        self.update_name_entry.pack(side='left')
-        self.update_date.pack(side='left')
-        self.update_date_entry.pack(side='left')
         self.update_button = tkinter.Button(self.upper_frame2, text='UPDATE', command=self.update_connection)
         self.update_button.pack()
         self.spacing = tkinter.Label(self.upper_frame2, text=' ')
