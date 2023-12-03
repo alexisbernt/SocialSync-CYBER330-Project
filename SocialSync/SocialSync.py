@@ -7,13 +7,14 @@ from Page_Manager import Book
 
 from CSV_interactions import *
 
-width, height = 720, 480
-
 
 class SocialSync:
     def __init__(self):
-        self.screen = tb.Window(title='SocialSync', size=[width, height], resizable=[False, False], themename='superhero')
-        self.name_list = ScrolledFrame(self.screen, width=width, height=height)
+        self.screen = tb.Window(title='SocialSync', resizable=[False, False], themename='superhero')
+        self.width = self.screen.winfo_screenwidth() /2
+        self.height = self.screen.winfo_screenheight() /2
+        print(self.width, self.height)
+        self.name_list = ScrolledFrame(self.screen, width=self.width, height=self.height)
         self.current_widget = []
         self.sorted_names = {}
         self.sort_type = StringVar()
@@ -38,17 +39,17 @@ class SocialSync:
         entries = 0
 
         # create a frame for all the menu option at the top of the screen
-        menu_frame = Frame(self.screen, width=width)
+        menu_frame = Frame(self.screen, width=self.width)
         menu_frame.pack(fill=X, pady=10, padx=10)
         self.current_widget.append(menu_frame)
 
         # create a scroll frame for all the connections
-        self.name_list = ScrolledFrame(self.screen, width=width, height=height-125)
+        self.name_list = ScrolledFrame(self.screen, width=self.width, height=self.height-125)
         self.name_list.pack()
         self.current_widget.append(self.name_list)
 
         # set up frame for page control
-        page_frame = Frame(self.screen, width=width)
+        page_frame = Frame(self.screen, width=self.width)
         page_frame.pack(fill=X, pady=10, padx=10)
         self.current_widget.append(page_frame)
 
@@ -203,7 +204,7 @@ class SocialSync:
         self.clear_screen()
 
         # create the frame for all menu options
-        menu_frame = Frame(self.screen, width=width)
+        menu_frame = Frame(self.screen, width=self.width)
         menu_frame.pack(fill=X)
         self.current_widget.append(menu_frame)
 
@@ -267,7 +268,7 @@ class SocialSync:
         self.clear_screen()
 
         # create the frame for all menu options
-        menu_frame = Frame(self.screen, width=width)
+        menu_frame = Frame(self.screen, width=self.width)
         menu_frame.pack(fill=X)
         self.current_widget.append(menu_frame)
 
