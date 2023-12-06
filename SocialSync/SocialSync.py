@@ -10,11 +10,11 @@ from CSV_interactions import *
 
 class SocialSync:
     def __init__(self):
-        self.screen = tb.Window(title='SocialSync', resizable=[False, False], themename='superhero')
+        self.screen = tb.Window(title='SocialSync', resizable=[False, False], themename='superhero', iconphoto='_internal/SocialSyncShip.png')
         self.width = self.screen.winfo_screenwidth() /2
         self.height = self.screen.winfo_screenheight() /2
-        print(self.width, self.height)
-        self.name_list = ScrolledFrame(self.screen, width=self.width, height=self.height)
+        self.screen.config(width=self.width, height=self.height)
+        self.name_list = ScrolledFrame(self.screen, width=self.width, height=self.height-125)
         self.current_widget = []
         self.sorted_names = {}
         self.sort_type = StringVar()
