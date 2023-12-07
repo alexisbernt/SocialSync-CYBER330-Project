@@ -2,7 +2,7 @@ import csv
 from hash_map_base import HashMapBase
 from datetime import datetime
 
-connections_file = 'SocialSync.csv'
+connections_file = '_internal/SocialSync.csv'
 connection_map = HashMapBase()
 
 

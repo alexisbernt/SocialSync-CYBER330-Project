@@ -242,7 +242,6 @@ class SocialSync:
 
     # Add the name and date to the hash map then push it to the CSV
     def add_connection(self, first, last, date):
-        change = True
         for n, d in connection_map.items():
             if (first + ' ' + last).lower() == n.lower():
                 error_message = Messagebox.yesno(message='A connection with the name ' + n + ' already exist, would you like to override it',
@@ -256,12 +255,12 @@ class SocialSync:
             error_message = MessageDialog(message='Invalid First or Last Name', title='Invalid Name', buttons=['OK:superhero'], alert=True)
             error_message.show()
             self.current_widget.append(error_message)
+            return
 
         # Update connection map with new connection
-        if change:
-            connection_map[first + ' ' + last] = date
-            push_connections()
-            self.name_sort()
+        connection_map[first + ' ' + last] = date
+        push_connections()
+        self.name_sort()
 
     # update the connection date
     def modify_screen(self, name, date):

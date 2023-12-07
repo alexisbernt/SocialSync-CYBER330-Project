@@ -1,1 +1,1 @@
-pyinstaller -w -i '_internal/SocialSync' --add-data 'CSV_interactions.py:.' --add-data 'hash_map_base.py:.' --add-data 'Page_Manager.py:.' SocialSync.py
+pyinstaller -w -i '_internal/SocialSync.png' --add-data 'CSV_interactions.py:.' --add-data 'hash_map_base.py:.' --add-data 'Page_Manager.py:.' --add-data '_internal/SocialSync.csv:.' SocialSync.py
